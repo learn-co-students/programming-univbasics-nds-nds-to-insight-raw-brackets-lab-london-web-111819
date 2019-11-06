@@ -9,25 +9,26 @@ def directors_totals(nds)
   #pp directors_database
 
   i = 0
-  number_of_directors = directors_database.length
 
+  number_of_directors = nds.length
 
   result = {}
   gross_movie_income = 0
 
 
   until i == number_of_directors do
+
     j = 0
-    number_of_movies = directors_database[i][:movies].length
+    number_of_movies = nds[i][:movies].length
 
     until j == number_of_movies do
 
-      gross_movie_income += directors_database[i][:movies][j][:worldwide_gross]
+      gross_movie_income += nds[i][:movies][j][:worldwide_gross]
       j += 1
 
     end
 
-    result[(directors_database[i][:name])] = gross_movie_income
+    result[(nds[i][:name])] = gross_movie_income
     gross_movie_income = 0
     i += 1
   end
