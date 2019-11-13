@@ -12,37 +12,25 @@ def directors_totals(nds)
   # ...
   # Be sure to return the result at the end!
   #nil
-  result={}
+  #get the full db
   vm = directors_database
-  inner = 0 
-  outer = 0 
-  result_for_current_dir = 0 
+  # reset indicies to 0, 
+  # prep the result hash to be returned/updated
+  # rest gross_for_current_director to 0. It will be recycled after processing a director
+  result={} ; inner_index = 0 ; outer_index = 0 ; gross_for_current_director = 0 
   
-  #i = 0 
-  #while i < vm[0][:movies].length do
-  #  puts vm[0][:movies][i][:title].to_s
-  #  i=i+1 
-  #end
-  
-  while outer < vm.length do
-    current_dir = vm[outer][:name]
-    #puts current_dir
-    while inner < vm[outer][:movies].length do
-      #puts vm[outer][inner][:movies]
-      result_for_current_dir = result_for_current_dir + vm[outer][:movies][inner][:worldwide_gross]
-      inner = inner + 1 
+  while outer_index < vm.length do
+    current_director = vm[outer_index][:name]
+    while inner_index < vm[outer_index][:movies].length do
+      gross_for_current_director += vm[outer_index][:movies][inner_index][:worldwide_gross]
+      inner_index += 1 #move on to the next movie
     end
-    puts current_dir + result_for_current_dir.to_s
-    #result.merge({:current_dir=>result_for_current_dir})
-    result[current_dir]=result_for_current_dir
-    #p result
-    #puts result
-    inner = 0 
-    result_for_current_dir = 0 
-    outer = outer + 1 
+    result[current_director]=gross_for_current_director
+    #reset inner_index and gross_for_current_director to 0
+    inner_index = 0 ; gross_for_current_director = 0 
+    outer_index += 1 #move on to the next director
   end
-  
-  #p result
+
   return result
 end
 
@@ -52,4 +40,4 @@ def pretty_print_nds(nds)
 end
 
 #pretty_print_nds(directors_database)
-directors_totals(directors_database)
+p directors_totals(directors_database)
